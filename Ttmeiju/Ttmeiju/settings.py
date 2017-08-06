@@ -8,6 +8,7 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+import os # add by sagewang
 
 BOT_NAME = 'Ttmeiju'
 
@@ -17,9 +18,14 @@ NEWSPIDER_MODULE = 'Ttmeiju.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'Ttmeiju (+http://www.yourdomain.com)'
+# add by sagewang
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.54 Safari/536.5'
+
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+# modify by sagewang 让scrapy不要遵守robot协议，之后就能正常爬取了
+# ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -67,6 +73,21 @@ ROBOTSTXT_OBEY = True
 #ITEM_PIPELINES = {
 #    'Ttmeiju.pipelines.TtmeijuPipeline': 300,
 #}
+
+# add by sagewang
+ITEM_PIPELINES = {
+    'Ttmeiju.pipelines.WriteToFilePipeline': 3,
+    'Ttmeiju.pipelines.MyImagesPipeline': 1,
+}
+# 图片存储路径
+IMAGES_STORE = os.path.join(os.getcwd(), 'image')
+#自定义存储imageurl的字段,item["image_urls"]
+# IMAGES_URL_FILED = "image_urls"
+
+IMAGES_EXPIRES = 90
+IMAGES_MIN_HEIGHT = 110
+IMAGES_MIN_WIDTH = 110
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
