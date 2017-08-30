@@ -7,10 +7,7 @@
 6. django_demo，使用Django搭建简单的博客
 7. zhihu_login，手动输入验证码，模拟登录知乎
 8. dingdian2，抓取顶点小说
-
-8. Test，黑客测试
-mzitu                   run mzitu5.py; scrapy + mongodb
-mzitu_scrapy            not ok
+9. Test，黑客测试
 
 
 
