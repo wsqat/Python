@@ -1,0 +1,9 @@
+Content-Encoding: gzip
+Set-Cookie: PHPSESSID=c00ju0qeftn6ketm5fb52lvea5; path=/; domain=chuangshi.qq.com
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Server: nginx
+Location: /public/404.html
+Pragma: no-cache
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Date: Fri, 08 Sep 2017 09:39:05 GMT
+Content-Type: text/html
