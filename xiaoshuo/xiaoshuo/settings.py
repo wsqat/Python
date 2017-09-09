@@ -28,7 +28,7 @@ COOKIES_ENABLED = False
 #设置用户代理值,随便浏览一个网页，按F12 -> Network -> F5，随便点击一项，你都能看到有 User-agent 这一项，将这里面的内容拷贝就可以。
 USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
 
-DOWNLOAD_DELAY = 1
+DOWNLOAD_DELAY = 0.1
 CONCURRENT_REQUESTS=600
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)

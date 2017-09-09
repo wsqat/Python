@@ -18,7 +18,7 @@ sys.setdefaultencoding('utf_8_sig')
 # print cols
 # df = pd.read_csv('items.csv',header=0)
 # df = pd.read_csv('xxsy.csv',header=0)
-df = pd.read_csv('xiaoshuo2.csv',header=0)
+df = pd.read_csv('xiaoshuo.csv',header=0)
 # df = pd.read_csv('xs.csv',header=0)
 # print df.head()
 # print ""
