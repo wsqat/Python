@@ -3,7 +3,8 @@
 from scrapy import cmdline
 
 # cmdline.execute("scrapy crawl xxsy".split())
-cmdline.execute("scrapy crawl qidian".split())
+# cmdline.execute("scrapy crawl qidian".split())
+cmdline.execute("scrapy crawl seventeen".split())
 # cmdline.execute("scrapy crawl qidianmm".split())
 # cmdline.execute("scrapy crawl zongheng".split())
 # cmdline.execute("scrapy crawl chuangshi".split())

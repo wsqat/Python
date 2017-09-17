@@ -17,7 +17,8 @@ class XiaoshuoPipeline(object):
         # self.csvfile = file('items.csv', 'wb')
         # self.csvfile = open('items.csv', 'wb')
         # self.csvfile = open('qdxs.csv', 'wb')
-        self.csvfile = open('qdmm.csv', 'wb')
+        # self.csvfile = open('qdmm.csv', 'wb')
+        self.csvfile = open('17k.csv', 'wb')
         # self.csvfile = open('xxsy.csv', 'wb')
         # self.csvfile = open('cszw.csv', 'wb') # 创世中文
         # self.csvfile = open('cszw.csv', 'ab')  # 创世中文 追加写入
