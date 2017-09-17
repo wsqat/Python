@@ -7,49 +7,66 @@ reload(sys)
 # sys.setdefaultencoding('utf-8')
 sys.setdefaultencoding('utf_8_sig')
 
-#filename可以直接从盘符开始，标明每一级的文件夹直到csv文件，header=None表示头部为空，
-# sep=' '表示数据间使用空格作为分隔符，如果分隔符是逗号，只需换成 ‘，’即可。
-# df=pd.read_csv('/Users/shiqingwang/Desktop/code/python/github/Python/xiaoshuo/xiaoshuo/dingdian.csv') 
-# df=pd.read_csv('dingdian.csv')
-# df=pd.read_csv('items.csv',names=['novel_name','category','collects','reviews'])
-# print df.head()
-# print df.tail()#作为示例，输出CSV文件的前5行和最后5行，这是pandas默认的输出5行，# 可以根据需要自己设定输出几行的值
-# cols = df.columns # 返回全部列名
-# print cols
-# df = pd.read_csv('items.csv',header=0)
-# df = pd.read_csv('xxsy.csv',header=0)
-df = pd.read_csv('xiaoshuo.csv',header=0)
-# df = pd.read_csv('xs.csv',header=0)
-# print df.head()
-# print ""
+df = pd.read_csv('novel.csv',header=0,usecols=[0,1,6,7,8])
+# df.iloc[:,[0,1]]
+print df.head()
+#cols = df.columns
+#print cols
+
+# 本月点击排行榜，
 lc=pd.DataFrame(df)
-# asc升序
-# axis=0, level=None, ascending=True, inplace=False, kind='quicksort', na_position='last', sort_remaining=True, by=None
-# new = lc.sort_index(by="collects",ascending=False)
-new = lc.sort_values(by=['reviews','collects'],ascending=False)
-# # # new = lc.nlargest(5,['collects'])
-print new.head(10)
-# df2=pd.DataFrame(df).nlargest(5, columns='collects')
-# print df2
-# new = lc.sort_values(by=['reviews'],ascending=False)
-# print new.head(10)
+lc = lc.iloc[:,[0,4]]
+print df.columns
+print lc.head()
+new = lc.sort_values(by=['month'],ascending=False)
+print new.head(20)
 
-# leetcode
-# class Solution:
-#     def twoSum(self, nums, target):
-#         """
-#         :type nums: List[int]
-#         :type target: int
-#         :rtype: List[int]
-#         """
-#         looktable = {}
-#         for i, v in enumerate(nums):
-#             print looktable;
-#             if target - v in looktable:
-#                 return [looktable[target-v], i]
-#             looktable[v] = i
+import matplotlib.pyplot as plt
+plt.rcdefaults()
+# print new.iloc[:,[1]].head()
+# month = np.arange(len(new.iloc[:,[1]]))
+# name = np.arange(len(new.iloc[:,[0]]))
+# plt.bar(name, month, align='center', alpha=0.4)
+# plt.xlabel(u'热门小说本月点击量')
+# plt.ylabel(u'热门小说名称',fontproperties=getChineseFont())
+# plt.title('热门小说本月点击排行榜')
+# # plt.savefig("barh.eps",format="eps")
+# plt.legend()
+# # fig = plt.figure()
+# plt.show()
+# X = new.iloc[:,[1]].head(10)
+# Y = new.iloc[:,[0]].head(10)
+# month = np.arange(len(new.iloc[:,[1]]))
+# name = np.arange(len(new.iloc[:,[0]]))
 
-# test = Solution()
-# nums = [3,2,4]
-# test.twoSum(nums,6)
+# lc.plot(kind='bar')  #分开并列线束
+# lc.plot(kind='bar', stacked=True) #四个在同一个里面显示 百分比的形式
+# new = new.head(20)
+# # new.plot(kind='barh', stacked=False)#纵向显示
+# plt.barh(month, name, 0.4, color="blue")
+# # plt.barh(y_pos, performance, align='center', alpha=0.4)
+# plt.yticks(new['month'], new['novel_name'])
+# plt.xlabel(u'热门小说本月点击量')
+# plt.ylabel(u'热门小说名称')
+# plt.title(u'热门小说本月点击排行榜')
+# plt.figure(figsize=(8,6), dpi=100)  # 创建一个8*6 点(point)的图，并设置分辨率为100
+# # plt.show()
+
+# 历史点击排行榜，
+lc2 = pd.DataFrame(df)
+lc2 = lc2.iloc[:,[0,3]]
+new2 = lc2.sort_values(by=['reviews'],ascending=False)
+print new2.head(20)
+
+# 历史收藏榜，
+lc3 = pd.DataFrame(df)
+lc3 = lc3.iloc[:,[0,2]]
+new3 = lc3.sort_values(by=['collects'],ascending=False)
+print new3.head(20)
+
+# 热门作者，
+lc4 = pd.DataFrame(df)
+lc4 = lc4.iloc[:,[1,3]]
+new4 = lc4.sort_values(by=['reviews'],ascending=False)
+print new4.head(20)
 

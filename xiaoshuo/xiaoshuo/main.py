@@ -3,8 +3,10 @@
 from scrapy import cmdline
 
 # cmdline.execute("scrapy crawl xxsy".split())
-# cmdline.execute("scrapy crawl dingdian".split())
-cmdline.execute("scrapy crawl chuangshi".split())
+cmdline.execute("scrapy crawl qidian".split())
+# cmdline.execute("scrapy crawl qidianmm".split())
+# cmdline.execute("scrapy crawl zongheng".split())
+# cmdline.execute("scrapy crawl chuangshi".split())
 # cmdline.execute("scrapy crawl qidian".split())
 # cmdline.execute("scrapy crawl dingdian -o dingdian.csv".split())
 # from scrapy.cmdline import execute

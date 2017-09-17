@@ -21,6 +21,7 @@ class XXSY(scrapy.Spider):
     query = '?s_wd=&sort=1&s_type='
 
     def start_requests(self):
+        # for i in range(1, 2):
         for i in range(1, 18):
             url = self.bash_url + self.query + str(i)
             yield Request(url, self.parse)
@@ -53,6 +54,7 @@ class XXSY(scrapy.Spider):
         # print selector
         novels = selector.xpath('//ul[@class="con_ord_2"]')
         # print novels
+        # nameinfo = novels[0]
         for nameinfo in novels:
             novel_name = nameinfo.xpath('li[2]/a/text()').extract()[0]
             # print novel_name
@@ -82,4 +84,31 @@ class XXSY(scrapy.Spider):
             targentcontent['click_num_total'] = int(click_num_total)
             # targentcontent['name_id'] = name_id
             # targentcontent['novel_breif'] = novel_breif
-            yield targentcontent
+            # yield targentcontent
+            if novelurl is not None:
+                yield Request(str(novelurl), dont_filter=True, callback=self.get_novelcontent, meta={'targentcontent': targentcontent})
+
+
+    def get_novelcontent(self, response):
+        # print response.body
+        selector = Selector(response)
+        # print selector
+        click_num_total = selector.xpath('//span[@id="b-info-click"]/text()').extract()[0]
+        # print click_num_total
+        collect_num_total = selector.xpath('//span[@id="b-info-shoucang"]/text()').extract()[0]
+        # print collect_num_total
+        click_num_month = selector.xpath('//span[@id="b-info-monthpiao"]/text()').extract()[0]
+        # print click_num_month
+        targentcontent = response.meta['targentcontent']
+        author = targentcontent['author']  # 小说作者
+        novelurl = response.url  # 小说地址
+        # print author+" "+novelurl
+        targentcontent['click_num_total'] = int(click_num_total)
+        targentcontent['collect_num_total'] = int(collect_num_total)
+        targentcontent['click_num_month'] = int(click_num_month)
+        # return ""
+        yield targentcontent
+
+
+
+

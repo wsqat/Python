@@ -15,8 +15,8 @@ class Myspider(scrapy.Spider):
     bashurl = '.html'
 
     def start_requests(self):
-        # for i in range(1,11):
-        for i in range(1, 11):
+        for i in range(1,2):
+        # for i in range(1, 11):
             url = self.bash_url + str(i) + "_1" + self.bashurl
             yield Request(url, self.parse)
 
@@ -26,8 +26,8 @@ class Myspider(scrapy.Spider):
         print "max_num: "+max_num
         baseurl = baseurl[:-7]
 
-        # for num in xrange(1, 3):
-        for num in xrange(1, int(max_num) + 1):
+        for num in xrange(1, 2):
+        # for num in xrange(1, int(max_num) + 1):
             newurl = baseurl + "_" + str(num) + self.bashurl
             # 此处使用dont_filter和不使用的效果不一样，使用dont_filter就能够抓取到第一个页面的内容，不用就抓不到
             # scrapy会对request的URL去重(RFPDupeFilter)，加上dont_filter则告诉它这个URL不参与去重。
@@ -90,6 +90,7 @@ class Myspider(scrapy.Spider):
         targentcontent['click_num_total'] = int(click_num_total)
         # targentcontent['name_id'] = name_id
         # targentcontent['novel_breif'] = novel_breif
-        yield targentcontent
+        # yield targentcontent
+        return ""
         # print novel_name,author,novelurl,serialstatus,serialnumber,category,name_id,collect_num_total,click_num_total,chapterlisturl
 

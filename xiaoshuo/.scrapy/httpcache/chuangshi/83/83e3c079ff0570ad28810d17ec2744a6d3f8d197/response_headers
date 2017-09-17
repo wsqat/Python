@@ -1,9 +1,0 @@
-X-Cache: HIT from t-varnish-3
-Content-Encoding: gzip
-Age: 356
-Who: t-main-12
-Who: cs-dproxy-11
-Server: nginx
-Date: Sat, 09 Sep 2017 01:45:40 GMT
-Runtime: 0.1747
-Content-Type: text/html; charset=utf-8

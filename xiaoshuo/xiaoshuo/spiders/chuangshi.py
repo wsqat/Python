@@ -60,6 +60,10 @@ class Chuangshi(scrapy.Spider):
         collect_num_total = response.xpath('//tr[1]/td[2]/text()').extract_first()  # 收藏
         collect_num_total = int(collect_num_total.split("：")[1])
         # print collect_num_total
+        click_num_month = response.xpath('//tr[1]/td[3]/text()').extract_first()  # 收藏
+        click_num_month = int(click_num_month.split("：")[1])*4
+        # print click_num_month
+
         serialnumber = response.xpath('//tr[1]/td[4]/text()').extract_first()  # 连载字数
         serialnumber = int(serialnumber.split("：")[1])
         # print serialnumber
@@ -77,8 +81,10 @@ class Chuangshi(scrapy.Spider):
         targentcontent['category'] = category
         targentcontent['collect_num_total'] = int(collect_num_total)
         targentcontent['click_num_total'] = int(click_num_total)
+        targentcontent['click_num_month'] = int(click_num_month)
         # targentcontent['name_id'] = name_id
         # targentcontent['novel_breif'] = novel_breif
         yield targentcontent
+        # return ""
         # print novel_name,author,novelurl,serialstatus,serialnumber,category,name_id,collect_num_total,click_num_total,chapterlisturl
 

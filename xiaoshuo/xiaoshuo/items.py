@@ -19,6 +19,7 @@ class XiaoshuoItem(scrapy.Item):
     category = scrapy.Field()  # 小说类别
     collect_num_total = scrapy.Field()  # 总收藏
     click_num_total = scrapy.Field()  # 总点击
+    click_num_month = scrapy.Field()  # 月点击
     # name_id = scrapy.Field()  # 小说编号
     # novel_breif = scrapy.Field()  # 小说简介
     # pass

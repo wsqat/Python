@@ -62,11 +62,12 @@ CONCURRENT_REQUESTS=600
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'xiaoshuo.middlewares.MyCustomDownloaderMiddleware': 543,
-#    # 'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,#关闭默认下载器
-#    # 'xiaoshuo.JavaScriptMiddleware.JavaScriptMiddleware':543 #键为中间件类的路径，值为中间件的顺序
-# }
+DOWNLOADER_MIDDLEWARES = {
+   'xiaoshuo.useragent.UserAgent': 1
+   # 'xiaoshuo.middlewares.MyCustomDownloaderMiddleware': 543,
+   # 'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,#关闭默认下载器
+   # 'xiaoshuo.JavaScriptMiddleware.JavaScriptMiddleware':543 #键为中间件类的路径，值为中间件的顺序
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
