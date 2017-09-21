@@ -7,7 +7,7 @@ reload(sys)
 # sys.setdefaultencoding('utf-8')
 sys.setdefaultencoding('utf_8_sig')
 
-df = pd.read_csv('novel.csv',header=0,usecols=[0,1,6,7,8])
+df = pd.read_csv('novels.csv',header=0,usecols=[0,1,6,7,8])
 # df.iloc[:,[0,1]]
 print df.head()
 #cols = df.columns
@@ -20,6 +20,7 @@ print df.columns
 print lc.head()
 new = lc.sort_values(by=['month'],ascending=False)
 print new.head(20)
+
 
 import matplotlib.pyplot as plt
 plt.rcdefaults()
@@ -53,20 +54,23 @@ plt.rcdefaults()
 # # plt.show()
 
 # 历史点击排行榜，
-lc2 = pd.DataFrame(df)
-lc2 = lc2.iloc[:,[0,3]]
-new2 = lc2.sort_values(by=['reviews'],ascending=False)
-print new2.head(20)
+# lc2 = pd.DataFrame(df)
+# lc2 = lc2.iloc[:,[0,3]]
+# new2 = lc2.sort_values(by=['reviews'],ascending=False)
+# print new2.head(20)
 
 # 历史收藏榜，
-lc3 = pd.DataFrame(df)
-lc3 = lc3.iloc[:,[0,2]]
-new3 = lc3.sort_values(by=['collects'],ascending=False)
-print new3.head(20)
+# lc3 = pd.DataFrame(df)
+# lc3 = lc3.iloc[:,[0,2]]
+# new3 = lc3.sort_values(by=['collects'],ascending=False)
+# print new3.head(20)
 
 # 热门作者，
 lc4 = pd.DataFrame(df)
 lc4 = lc4.iloc[:,[1,3]]
+lc4 = lc4.groupby(by=['author'])['reviews'].sum()
+# 生成的数据类型是Series,如果进一步需要将其转换为dataframe,可以调用Series中的to_frame()方法.
+lc4 = lc4.to_frame()
 new4 = lc4.sort_values(by=['reviews'],ascending=False)
 print new4.head(20)
 

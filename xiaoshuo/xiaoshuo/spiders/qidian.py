@@ -14,18 +14,20 @@ class Chuangshi(scrapy.Spider):
     allowed_domains = ["a.qidian.com/"]
     bash_url = "http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=" #1
     #http://chuangshi.qq.com/bk/p/2.html
-    # start_urls = ['http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=%s' % i for i in [1,10000,20000,30000]]
-    start_urls = ['http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=2']
+    start_urls = ['http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=%s' % i for i in [1,100,500,800]]
+    # start_urls = ['http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=20000']
 
 
 
     def start_requests(self):
         # for i in range(1,11):
         # max_num = 35426 # 获取当前页面的最大页码数
-        # for i in range(1, int(max_num)+1):
-        for i in range(1, 2):
-            # print  "当前页数："+str(max_num)
+        max_num = 1000;
+        for i in range(1, int(max_num)+1):
+        # for i in range(1, 2):
+        #     print  "当前页数："+str(max_num)
             url = self.bash_url + str(i)
+        #     url = 'http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=1000'
             print url
             yield Request(url, dont_filter=True, callback=self.get_name)  # 将新的页面url的内容传递给get_name函数去处理
 
@@ -62,15 +64,23 @@ class Chuangshi(scrapy.Spider):
     def get_novelcontent(self, response):
         selector = Selector(response)
         click_num_total = selector.xpath('//div[@class="book-info "]/p[3]/em[2]/text()').extract()[0]
-        click_num_total = float(click_num_total)*10000
+        click_num_total_status = selector.xpath('//div[@class="book-info "]/p[3]/cite[2]/text()').extract()[0]
+        if click_num_total_status == u'万总点击':
+            click_num_total = float(click_num_total)*10000
+        # print str(click_num_total)+" "+ click_num_total_status
         collect_num_total = selector.xpath('//div[@class="book-info "]/p[3]/em[3]/text()').extract()[0]
-        collect_num_total = float(collect_num_total)*10000
+        collect_num_total_status = selector.xpath('//div[@class="book-info "]/p[3]/cite[3]/text()').extract()[0]
+        if collect_num_total_status == u'万总推荐':
+            collect_num_total = float(collect_num_total)*10000
+        # print str(collect_num_total) + " " + collect_num_total_status
 
         # 月推荐票 http://book.qidian.com/info/1004608738
         click_num_month = selector.xpath('//i[@id="recCount"]/text()').extract()[0]
         click_num_month = int(click_num_month)*4
+        # print click_num_month
 
         targentcontent = response.meta['targentcontent']
+        # print targentcontent['novelurl']
         targentcontent['click_num_total'] = int(click_num_total)
         targentcontent['collect_num_total'] = int(collect_num_total)
         targentcontent['click_num_month'] = int(click_num_month)

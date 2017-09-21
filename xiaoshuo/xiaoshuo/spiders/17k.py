@@ -16,16 +16,16 @@ class SeventeenK(scrapy.Spider):
     # bash_url = "http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_1.html?" #1
     base_url = "http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_" #1
     #http://chuangshi.qq.com/bk/p/2.html
-    # start_urls = ['http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=%s' % i for i in [1,10000,20000,30000]]
-    start_urls = ['http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_1.html?']
+    start_urls = ['http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_%s.html?' % i for i in [1,2000,4000,6000]]
+    # start_urls = ['http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_1.html?']
 
 
 
     def start_requests(self):
         # for i in range(1,11):
-        # max_num = 35426 # 获取当前页面的最大页码数
-        # for i in range(1, int(max_num)+1):
-        for i in range(1, 2):
+        max_num = 7329 # 获取当前页面的最大页码数
+        for i in range(1, int(max_num)+1):
+        # for i in range(1, 2):
             # print  "当前页数："+str(max_num)
             url = self.base_url + str(i) + ".html?"
             print url
