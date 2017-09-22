@@ -20,8 +20,9 @@ class QidianMM(scrapy.Spider):
     def start_requests(self):
         # max_num = 876 # 获取当前页面的最大页码数
         max_num = 200  # 获取当前页面的最大页码数
-        for i in range(1, int(max_num)+1):
-        # for i in range(1, 2):
+        # for i in range(1, int(max_num)+1):
+        print u"当前开始爬取起点女生网……"
+        for i in range(1, 3):
             # print  "当前页数："+str(max_num)
             url = self.bash_url + str(i)
             print url

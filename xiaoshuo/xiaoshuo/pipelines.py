@@ -58,7 +58,7 @@ class XiaoshuoPipeline(object):
         self.count = self.count + 1
         # print "抓取起点小说网第"+str(self.count)+"条记录"
         # print "抓取起点女生网第"+str(self.count)+"条记录"
-        print "抓取17小说网第" + str(self.count) + "条记录"
+        print "抓取第" + str(self.count) + "条记录"
         return item
 
     def close_spider(self):

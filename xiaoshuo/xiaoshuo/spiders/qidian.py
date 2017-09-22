@@ -9,7 +9,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-class Chuangshi(scrapy.Spider):
+class Qidian(scrapy.Spider):
     name = "qidian"
     allowed_domains = ["a.qidian.com/"]
     bash_url = "http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=" #1
@@ -23,8 +23,9 @@ class Chuangshi(scrapy.Spider):
         # for i in range(1,11):
         # max_num = 35426 # 获取当前页面的最大页码数
         max_num = 1000;
-        for i in range(1, int(max_num)+1):
-        # for i in range(1, 2):
+        # for i in range(1, int(max_num)+1):
+        print u"当前开始爬取起点小说网……"
+        for i in range(1, 3):
         #     print  "当前页数："+str(max_num)
             url = self.bash_url + str(i)
         #     url = 'http://a.qidian.com/?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page=1000'

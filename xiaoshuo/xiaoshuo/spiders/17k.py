@@ -25,9 +25,10 @@ class SeventeenK(scrapy.Spider):
         # for i in range(1,11):
         # max_num = 7329 # 获取当前页面的最大页码数
         max_num = 500  # 获取当前页面的最大页码数
+        print u"当前开始爬取17K小说网……"
         for i in range(2, 5):
             # for j in range(1, int(max_num)+1):
-            for j in range(1, 3):
+            for j in range(1, 2):
             #     print  "当前页数："+str(max_num)
                 url = self.base_url + str(i) + "_0_0_0_0_4_0_0_" + str(j) + ".html?"
                 # print url

@@ -107,4 +107,4 @@ ITEM_PIPELINES = {
 
 # COMMANDS_MODULE = 'yourprojectname.commands'
 
-
+COMMANDS_MODULE = 'xiaoshuo.commands'

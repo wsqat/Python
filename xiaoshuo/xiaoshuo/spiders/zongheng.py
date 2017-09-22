@@ -9,7 +9,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-class Chuangshi(scrapy.Spider):
+class ZhongHeng(scrapy.Spider):
     name = "zongheng"
     allowed_domains = ["book.zongheng.com/"]
     bash_url = "http://book.zongheng.com/store/c0/c0/b9/u0/p"
@@ -22,9 +22,10 @@ class Chuangshi(scrapy.Spider):
     def start_requests(self):
         # for i in range(1,11):
         max_num = 999 # 获取当前页面的最大页码数
-        for i in range(1, int(max_num)+1):
-        # for i in range(1, 2):
-            print  "当前页数："+str(max_num)
+        # for i in range(1, int(max_num)+1):
+        print u"当前开始爬取纵横小说网……"
+        for i in range(1, 2):
+            # print  "当前页数："+str(max_num)
             url = self.bash_url  + str(i) + self.bashurl
             print url
             yield Request(url, dont_filter=True, callback=self.get_name)  # 将新的页面url的内容传递给get_name函数去处理
