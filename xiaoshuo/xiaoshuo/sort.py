@@ -9,61 +9,53 @@ sys.setdefaultencoding('utf_8_sig')
 
 df = pd.read_csv('novels.csv',header=0,usecols=[0,1,6,7,8])
 # df.iloc[:,[0,1]]
-print df.head()
+# print df.head()
 #cols = df.columns
 #print cols
 
 # 本月点击排行榜，
 lc=pd.DataFrame(df)
 lc = lc.iloc[:,[0,4]]
-print df.columns
-print lc.head()
-new = lc.sort_values(by=['month'],ascending=False)
-print new.head(20)
-
+# print df.columns
+# print lc.head()
+new = lc.sort_values(by=['month'],ascending=True)
+new = new.tail(20)
+# print new.shape
+# print new.columns
 
 import matplotlib.pyplot as plt
 plt.rcdefaults()
-# print new.iloc[:,[1]].head()
-# month = np.arange(len(new.iloc[:,[1]]))
-# name = np.arange(len(new.iloc[:,[0]]))
-# plt.bar(name, month, align='center', alpha=0.4)
-# plt.xlabel(u'热门小说本月点击量')
-# plt.ylabel(u'热门小说名称',fontproperties=getChineseFont())
-# plt.title('热门小说本月点击排行榜')
-# # plt.savefig("barh.eps",format="eps")
-# plt.legend()
-# # fig = plt.figure()
+# present = new.set_index('novel_name')
+# present[:20].plot(kind='barh')
+# # plt.figure(figsize=(12,9))
+# plt.title(u'热门小说本月点击排行榜', fontsize=16)
+# plt.xlabel(u'热门小说本月点击量', fontsize=16)
+# plt.ylabel(u'热门小说名称', fontsize=16)
 # plt.show()
-# X = new.iloc[:,[1]].head(10)
-# Y = new.iloc[:,[0]].head(10)
-# month = np.arange(len(new.iloc[:,[1]]))
-# name = np.arange(len(new.iloc[:,[0]]))
-
-# lc.plot(kind='bar')  #分开并列线束
-# lc.plot(kind='bar', stacked=True) #四个在同一个里面显示 百分比的形式
-# new = new.head(20)
-# # new.plot(kind='barh', stacked=False)#纵向显示
-# plt.barh(month, name, 0.4, color="blue")
-# # plt.barh(y_pos, performance, align='center', alpha=0.4)
-# plt.yticks(new['month'], new['novel_name'])
-# plt.xlabel(u'热门小说本月点击量')
-# plt.ylabel(u'热门小说名称')
-# plt.title(u'热门小说本月点击排行榜')
-# plt.figure(figsize=(8,6), dpi=100)  # 创建一个8*6 点(point)的图，并设置分辨率为100
-# # plt.show()
 
 # 历史点击排行榜，
-# lc2 = pd.DataFrame(df)
-# lc2 = lc2.iloc[:,[0,3]]
-# new2 = lc2.sort_values(by=['reviews'],ascending=False)
-# print new2.head(20)
+lc2 = pd.DataFrame(df)
+lc2 = lc2.iloc[:,[0,3]]
+new2 = lc2.sort_values(by=['reviews'],ascending=True)
+# new2 = new2.tail(20)
+# present = new2.set_index('novel_name')
+# present[:20].plot(kind='barh')
+# plt.title(u'热门小说历史点击排行榜', fontsize=16)
+# plt.xlabel(u'热门小说历史点击量', fontsize=16)
+# plt.ylabel(u'热门小说名称', fontsize=16)
+# plt.show()
 
 # 历史收藏榜，
 # lc3 = pd.DataFrame(df)
 # lc3 = lc3.iloc[:,[0,2]]
-# new3 = lc3.sort_values(by=['collects'],ascending=False)
-# print new3.head(20)
+# new3 = lc3.sort_values(by=['collects'],ascending=True)
+# new3 = new3.tail(20)
+# present = new3.set_index('novel_name')
+# present[:20].plot(kind='barh')
+# plt.title(u'热门小说历史收藏榜', fontsize=16)
+# plt.xlabel(u'热门小说历史收藏量', fontsize=16)
+# plt.ylabel(u'热门小说名称', fontsize=16)
+# plt.show()
 
 # 热门作者，
 lc4 = pd.DataFrame(df)
@@ -72,5 +64,12 @@ lc4 = lc4.groupby(by=['author'])['reviews'].sum()
 # 生成的数据类型是Series,如果进一步需要将其转换为dataframe,可以调用Series中的to_frame()方法.
 lc4 = lc4.to_frame()
 new4 = lc4.sort_values(by=['reviews'],ascending=False)
-print new4.head(20)
+new4 = new4.head(20)
+print new4
+# present = new4.set_index('author')
+# present[:20].plot(kind='barh')
+# plt.title(u'热门小说作者排行榜', fontsize=16)
+# plt.xlabel(u'热门小说作者点击量', fontsize=16)
+# plt.ylabel(u'热门小说作者', fontsize=16)
+# plt.show()
 

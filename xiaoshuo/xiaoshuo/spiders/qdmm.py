@@ -14,13 +14,14 @@ class QidianMM(scrapy.Spider):
     allowed_domains = ["a.qidian.com/"]
     bash_url = "http://a.qidian.com/mm?orderId=&sign=1&style=1&pageSize=20&siteid=0&hiddenField=0&page=" #1
     #http://chuangshi.qq.com/bk/p/2.html
-    start_urls = ['http://a.qidian.com/mm?orderId=&sign=1&style=1&pageSize=20&siteid=0&hiddenField=0&page=%s' % i for i in [1,500,800]]
+    start_urls = ['http://a.qidian.com/mm?orderId=&sign=1&style=1&pageSize=20&siteid=0&hiddenField=0&page=%s' % i for i in [1,100]]
     # start_urls = ['http://a.qidian.com/mm?orderId=&sign=1&style=1&pageSize=20&siteid=0&hiddenField=0&page=1']
 
     def start_requests(self):
-        max_num = 876 # 获取当前页面的最大页码数
-        # for i in range(1, int(max_num)+1):
-        for i in range(1, 2):
+        # max_num = 876 # 获取当前页面的最大页码数
+        max_num = 200  # 获取当前页面的最大页码数
+        for i in range(1, int(max_num)+1):
+        # for i in range(1, 2):
             # print  "当前页数："+str(max_num)
             url = self.bash_url + str(i)
             print url
@@ -59,15 +60,23 @@ class QidianMM(scrapy.Spider):
     def get_novelcontent(self, response):
         selector = Selector(response)
         click_num_total = selector.xpath('//div[@class="book-info "]/p[3]/em[2]/text()').extract()[0]
-        click_num_total = float(click_num_total)*10000
+        click_num_total_status = selector.xpath('//div[@class="book-info "]/p[3]/cite[2]/text()').extract()[0]
+        if click_num_total_status == u'万总点击':
+            click_num_total = float(click_num_total) * 10000
+        # print str(click_num_total)+" "+ click_num_total_status
         collect_num_total = selector.xpath('//div[@class="book-info "]/p[3]/em[3]/text()').extract()[0]
-        collect_num_total = float(collect_num_total)*10000
+        collect_num_total_status = selector.xpath('//div[@class="book-info "]/p[3]/cite[3]/text()').extract()[0]
+        if collect_num_total_status == u'万总推荐':
+            collect_num_total = float(collect_num_total) * 10000
+        # print str(collect_num_total) + " " + collect_num_total_status
 
         # 月推荐票 http://book.qidian.com/info/1004608738
         click_num_month = selector.xpath('//i[@id="recCount"]/text()').extract()[0]
-        click_num_month = int(click_num_month)*4
+        click_num_month = int(click_num_month) * 4
+        # print click_num_month
 
         targentcontent = response.meta['targentcontent']
+        # print targentcontent['novelurl']
         targentcontent['click_num_total'] = int(click_num_total)
         targentcontent['collect_num_total'] = int(collect_num_total)
         targentcontent['click_num_month'] = int(click_num_month)

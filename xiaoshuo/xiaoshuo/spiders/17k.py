@@ -14,23 +14,25 @@ class SeventeenK(scrapy.Spider):
     name = "seventeen"
     allowed_domains = ["all.17k.com/"]
     # bash_url = "http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_1.html?" #1
-    base_url = "http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_" #1
+    base_url = "http://all.17k.com/lib/book/" #2_0_0_0_0_4_0_0_1
     #http://chuangshi.qq.com/bk/p/2.html
-    start_urls = ['http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_%s.html?' % i for i in [1,2000,4000,6000]]
+    # start_urls = ['http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_%s.html?' % i for i in [1,200,400]]
     # start_urls = ['http://all.17k.com/lib/book/2_0_0_0_0_0_0_0_1.html?']
 
 
 
     def start_requests(self):
         # for i in range(1,11):
-        max_num = 7329 # 获取当前页面的最大页码数
-        for i in range(1, int(max_num)+1):
-        # for i in range(1, 2):
-            # print  "当前页数："+str(max_num)
-            url = self.base_url + str(i) + ".html?"
-            print url
-            # return ""
-            yield Request(url, dont_filter=True, callback=self.get_name)  # 将新的页面url的内容传递给get_name函数去处理
+        # max_num = 7329 # 获取当前页面的最大页码数
+        max_num = 500  # 获取当前页面的最大页码数
+        for i in range(2, 5):
+            # for j in range(1, int(max_num)+1):
+            for j in range(1, 3):
+            #     print  "当前页数："+str(max_num)
+                url = self.base_url + str(i) + "_0_0_0_0_4_0_0_" + str(j) + ".html?"
+                # print url
+                yield Request(url, dont_filter=True, callback=self.get_name)  # 将新的页面url的内容传递给get_name函数去处理
+        # return ""
 
     def get_name(self, response):
         myPgae = response.body
